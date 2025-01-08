@@ -81,6 +81,7 @@ class WhisperInference(BaseTranscriptionPipeline):
             ))
 
         elapsed_time = time.time() - start_time
+        self.offload() # Without queue system, this is not optimal (next item in queue needs to reload model), but for now enough for my use case
         return segments_result, elapsed_time
 
     def update_model(self,
