@@ -121,6 +121,7 @@ class TranslationBase(ABC):
             gr_str = f"Done! Subtitle is in the outputs/translation folder.\n\n{total_result}"
 
             output_file_paths = [item["path"] for key, item in files_info.items()]
+            self.offload() # Without queue system, this is not optimal (next item in queue needs to reload model), but for now enough for my use case
             return [gr_str, output_file_paths]
 
         except Exception as e:
